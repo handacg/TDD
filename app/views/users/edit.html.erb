@@ -1,0 +1,26 @@
+<% if request.env['PATH_INFO'] =~ /users\/\d\/edit/ && params[:id].to_i == @user.id %>
+<%= form_with(model: @user, local: true) do |f| %>
+<div class="container" style="width: 600px;">
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <%= f.label :first_name%>:
+    <%= f.text_field :first_name, class: "form-control", placeholder: "#{@user.first_name}", :required => true %>
+  </div>
+  <div class="form-group col-md-6">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control", placeholder: "#{@user.last_name}", :required => true %>
+  </div>
+  <div class="form-group col-md-6">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control", placeholder: "#{@user.email}", :required => true %>
+  </div>
+</div>
+<%= f.submit "Submit", class: "btn btn-primary" %>
+<% if request.env['PATH_INFO'] =~ /users\/\d\/edit/ %>
+<%= link_to 'Back', users_path, class: "btn btn-primary" %>
+<% end %>
+<% end %>
+<% else %>
+<p>You can't edit this gossip</p>
+<% end %>
+
